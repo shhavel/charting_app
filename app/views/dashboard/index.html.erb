@@ -1,0 +1,49 @@
+<div id="container"></div>
+
+<script type="text/javascript">
+  Highcharts.chart('container', {
+    title: {
+      text: 'Passing and Failing builds per day'
+    },
+
+    xAxis: {
+      categories: <%== @days %>
+    },
+
+    yAxis: {
+      title: {
+        text: 'Number'
+      }
+    },
+
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'middle'
+    },
+
+    series: [{
+      name: 'Passing',
+      data: <%= @passing.values_at(*@days) %>
+    }, {
+      name: 'Failing',
+      data: <%= @failing.values_at(*@days) %>
+    }],
+
+    responsive: {
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom'
+          }
+        }
+      }]
+    }
+
+  });
+</script>
